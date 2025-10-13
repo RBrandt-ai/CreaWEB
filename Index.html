@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreaWeb - Landing Pages en 24 Horas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        html { scroll-behavior: smooth; }
+
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: padding 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #D4AF37;
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: text-shadow 0.4s ease;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #D4AF37;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+        }
+
+        .logo:hover i {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        .nav-links {
+            display: flex;
+            margin-left: auto; /* Empuja el menú a la derecha */
+            padding-right: 20px; /* Añade espacio a la derecha del menú */
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: #D4AF37;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: rgba(212, 175, 55, 0.9);
+            color: #000;
+            padding: 12px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 10px 30px rgba(212, 175, 55, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Estilos para enlaces legales en el footer */
+        .copyright .legal-links {
+            margin-top: 8px;
+        }
+
+        .copyright .legal-links a {
+            color: #cfc39a;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .copyright .legal-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Modal legal */
+        .legal-modal { 
+            position: fixed; 
+            inset: 0; 
+            display: none; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 2000; 
+            padding: 20px; 
+        }
+
+        .legal-modal.open { display: flex; }
+
+        .legal-modal-backdrop {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+        }
+
+        .legal-modal-content {
+            position: relative; width: 90%; max-width: 1000px; height: 80%; background: #0b1220; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        .legal-modal-close {
+            position: absolute; top: 10px; right: 12px; z-index: 5; background: transparent; border: 0; color: #fff; font-size: 30px; cursor: pointer; padding: 6px 10px; opacity: 0.95;
+        }
+
+        @media (max-width: 600px) {
+            .legal-modal-content { height: 85%; }
+        }
+
+        /* Estilos específicos para contenido legal */
+        .legal-modal-body h2 {
+            margin-top: 0; color: #ffd; font-size: 1.6rem; margin-bottom: 12px; font-family: 'Orbitron', sans-serif;
+        }
+
+        .legal-modal-body h3 {
+            color: #e6d9b8; margin-top: 14px; margin-bottom: 6px; font-size: 1.02rem;
+        }
+
+        .legal-modal-body p { color: #d8d2b2; line-height: 1.6; margin-bottom: 10px; }
+
+        .legal-consent {
+            display: flex; align-items: center; gap: 12px; margin-top: 18px; flex-wrap: wrap; justify-content: flex-end;
+            border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px;
+        }
+
+        .legal-consent label { color: #d8d2b2; font-size: 0.95rem; }
+
+        .legal-consent input[type="checkbox"] { width: 18px; height: 18px; }
+
+        .legal-btn {
+            background: #D4AF37; color: #000; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; font-family: 'Orbitron', sans-serif;
+            transition: opacity 0.2s ease, transform 0.08s ease; opacity: 0.95;
+        }
+
+        .legal-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+        /* Toast de confirmación */
+        .legal-toast {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%) translateY(24px);
+            bottom: 24px;
+            background: rgba(212,175,55,0.96);
+            color: #000;
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 260ms cubic-bezier(.2,.9,.3,1), opacity 260ms ease;
+            z-index: 3000;
+        }
+
+        .legal-toast.show {
+            opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* padding-top is driven by a CSS variable so we can sync with the header height */
+            padding-top: var(--hero-padding-top, 80px);
+            /* smooth transition when header height or hero size changes */
+            transition: min-height 300ms ease, padding-top 200ms ease;
+            background: 
+                radial-gradient(circle at top right, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                linear-gradient(135deg, rgba(0, 31, 63, 0.7) 0%, rgba(0, 0, 0, 0.9) 100%),
+                url('https://plus.unsplash.com/premium_photo-1661679012183-1a09fb88942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            top: 0;
+            left: 0;
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.2;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .gold {
+            color: #D4AF37;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .cta-primary {
+            background: rgba(212, 175, 55, 0.9);
+            color: #000;
+            padding: 18px 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .cta-primary:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .cta-primary:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 15px 40px rgba(212, 175, 55, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 70px;
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #D4AF37;
+            border-radius: 2px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .benefit-card-1::before {
+            background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+        }
+
+        .benefit-card-2::before {
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+        }
+
+        .benefit-card-3::before {
+            background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #D4AF37;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 1;
+        }
+
+        .benefit-text {
+            z-index: 1;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .service-card-1::before {
+            background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
+        }
+
+        .service-card-2::before {
+            background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+        }
+
+        .service-card-3::before {
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+        }
+
+        .service-card-4::before {
+            background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #D4AF37;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #D4AF37;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .service-description {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at top right, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+            border-radius: 15px;
+            z-index: -1;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            left: -10px;
+            top: -20px;
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.3);
+            font-family: Georgia, serif;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .client-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 2px solid #D4AF37;
+            background: #333;
+        }
+
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .client-details {
+            flex-grow: 1;
+        }
+
+        .client-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #D4AF37;
+        }
+
+        .client-role {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .stars {
+            color: #D4AF37;
+            margin-top: 5px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid #D4AF37;
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .pricing-card.popular .pricing-title {
+            color: #D4AF37;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #D4AF37;
+            color: #000;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #D4AF37;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li i {
+            color: #D4AF37;
+            margin-right: 10px;
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            padding: 80px 0;
+            background: 
+                radial-gradient(circle at top right, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                linear-gradient(135deg, rgba(0, 31, 63, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .guarantee-content h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+            line-height: 1.4;
+        }
+
+        .guarantee-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ddd;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ddd;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+
+
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #001f3f 0%, #000 100%);
+            padding: 70px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            color: #D4AF37;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #D4AF37;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .footer-links a:hover {
+            color: #D4AF37;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #D4AF37;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #D4AF37;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-btn {
+                display: none; /* Ocultar el botón de presupuesto en móvil */
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                padding: 20px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .nav-links.active a {
+                padding: 15px 0;
+                text-align: center;
+            }
+
+            /* Mostrar el botón de presupuesto solo en el menú móvil activo */
+            .nav-links.active .mobile-only-btn {
+                display: inline-block;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* Ocultar el botón de presupuesto del menú móvil en la vista de escritorio */
+        .mobile-only-btn {
+            display: none;
+        }
+
+        /* Promo Banner Styles */
+        #promo-banner {
+            width: 100%;
+            margin-top: 110px; /* Adjust based on fixed header height */
+            margin-bottom: 40px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Estilos para el botón de WhatsApp en el banner de promoción */
+        .whatsapp-promo-button {
+            display: block; /* Para que ocupe su propia línea */
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-promo-button:hover {
+            transform: scale(1.08);
+        }
+
+        #promo-title {
+            font-size: 2.8rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            text-shadow: 0 0 30px #D4AF37, 0 0 80px #fff, 0 0 10px #D4AF37;
+            letter-spacing: 2px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            animation: glow 2s infinite alternate;
+        }
+        .promo-cta-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        #promo-countdown {
+            font-size: 1.5rem;
+            color: #FFD700; /* Tono de amarillo más brillante */
+            font-weight: bold;
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 59, 59, 0.2);
+            animation: flicker 2s infinite linear; /* Animación de titileo */
+            text-align: center;
+        }
+
+        #schedule-image {
+            max-width: 320px;
+            width: 45%;
+            height: auto;
+            border-radius: 20px;
+            display: block;
+            margin: 18px auto 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 2px 8px rgba(212,175,55,0.12);
+            transform-origin: center;
+            animation: floaty 6s ease-in-out infinite, sway 4s ease-in-out infinite;
+        }
+
+        .schedule-caption {
+            text-align: center;
+            color: #f3e9c9;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            opacity: 0.95;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            animation: fadeInUp 0.8s ease both, floaty 6s ease-in-out infinite, sway 4s ease-in-out infinite, glow 2s infinite alternate;
+            text-shadow: 0 0 8px rgba(212,175,55,0.6);
+        }
+
+        /* Countdown widget styles */
+        .countdown-widget {
+            display: flex; gap: 18px; justify-content: center; align-items: center; margin-top: 14px;
+        }
+
+        .cd-unit {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+            border: 1px solid rgba(212,175,55,0.14);
+            padding: 12px 18px; border-radius: 12px; min-width: 86px; text-align: center;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 2px 6px rgba(212,175,55,0.06);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+    .cd-number { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; color: #FFD775; text-shadow: 0 0 16px rgba(212,175,55,0.6); }
+    .cd-label { font-size: 0.85rem; color: #d8d2b2; margin-bottom: 8px; display: block; text-transform: none; }
+
+    /* Entry animation */
+    .cd-unit { opacity: 0; transform: translateY(8px) scale(0.98); }
+    .cd-unit.popIn { opacity: 1; transform: translateY(0) scale(1); transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 420ms ease; }
+
+    .countdown-widget .cd-unit:nth-child(1).popIn { transition-delay: 0ms; }
+    .countdown-widget .cd-unit:nth-child(2).popIn { transition-delay: 80ms; }
+    .countdown-widget .cd-unit:nth-child(3).popIn { transition-delay: 160ms; }
+    .countdown-widget .cd-unit:nth-child(4).popIn { transition-delay: 240ms; }
+
+        .cd-unit.pop { transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 50px rgba(212,175,55,0.12); }
+
+        @media (max-width: 560px) {
+            .countdown-widget { gap: 10px; }
+            .cd-unit { padding: 10px 12px; min-width: 64px; }
+            .cd-number { font-size: 1.2rem; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Animación flotante y oscilación lateral */
+        @keyframes floaty {
+            0% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+            100% { transform: translateY(0) rotate(-1deg); }
+        }
+
+        @keyframes sway {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 30px #D4AF37, 0 0 80px #fff, 0 0 10px #D4AF37; }
+            to   { text-shadow: 0 0 60px #fff, 0 0 120px #D4AF37, 0 0 20px #fff; }
+        }
+
+        /* Animación de titileo para el countdown */
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                    0 0 5px #D30000,
+                    0 0 10px #D30000,
+                    0 0 20px #D30000,
+                    0 0 40px #D30000;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- PROMO BANNER RESPLANDECIENTE -->
+        <div id="promo-banner">
+            <h1 id="promo-title">PROMOCIÓN VIGENTE AL <span id="promo-date">15 DE OCTUBRE 2025!</span></h1>
+            <div class="promo-cta-container">
+                <div id="promo-countdown">
+                    <!-- El countdown se moverió debajo del texto de la imagen para pruebas -->
+                    <!-- (Originalmente estaba aquí; ahora lo encontrarás más abajo) -->
+                </div>
+            </div>
+            <!-- Imagen añadida por petición: aparece debajo del countdown con animación de movimiento -->
+            <img id="schedule-image" src="50%.png" alt="Promoción 50%" />
+            <p class="schedule-caption">Landing page sencilla, 1 botón whatsapp</p>
+            <a href="https://wa.me/526145028244?text=Hola,%20me%20interesa%20la%20promoción%20vigente." target="_blank" rel="noopener noreferrer" class="whatsapp-promo-button" title="Enviar mensaje por WhatsApp">
+                <img src="Contactar-x-WA-700x187.png" alt="Botón para solicitar presupuesto por WhatsApp" style="height: 72px;">
+            </a>
+            <!-- Countdown widget (movido para pruebas): colocado debajo del texto inmediato posterior a la imagen -->
+            <div class="countdown-widget" role="timer" aria-live="polite" aria-atomic="true">
+                <div class="cd-unit">
+                    <div class="cd-label">Días</div>
+                    <div class="cd-number" id="cd-days">0</div>
+                </div>
+                <div class="cd-unit">
+                    <div class="cd-label">Horas</div>
+                    <div class="cd-number" id="cd-hours">00</div>
+                </div>
+                <div class="cd-unit">
+                    <div class="cd-label">Minutos</div>
+                    <div class="cd-number" id="cd-minutes">00</div>
+                </div>
+                <div class="cd-unit">
+                    <div class="cd-label">Segundos</div>
+                    <div class="cd-number" id="cd-seconds">00</div>
+                </div>
+            </div>
+        </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" id="logo" style="cursor: pointer;">
+                    <i class="fas fa-crown"></i>
+                    CreaWeb
+                </div>
+                <div class="nav-links">
+                    <a href="#benefits">Beneficios</a>
+                    <a href="#services">Servicios</a>
+                    <a href="#testimonials">Testimonios</a>
+                    <a href="#pricing">Precios</a>
+                    <a href="#contact">Contacto</a>
+                    <a href="#guarantee">Garantía</a>
+                    <a href="https://wa.me/526145028244?text=Quiero%20un%20presupuesto" target="_blank" rel="noopener noreferrer" class="nav-btn mobile-only-btn">Solicitar Presupuesto</a>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Tu sitio web listo<br> <span class="gold">en 24 horas</span> 🚀</h1>
+                <p class="subtitle">Página web moderna que atrae clientes desde el primer día, diseñada para que te encuentren fácilmente en internet.</p>
+                <a href="#contact" class="cta-primary">Quiero mi demo gratis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Beneficios rápidos</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card benefit-card-1">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="benefit-title">Diseño moderno</h3>
+                    <p class="benefit-text">Diseño moderno y llamativo que genera confianza.</p>
+                </div>
+                <div class="benefit-card benefit-card-2">
+                    <div class="benefit-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="benefit-title">Visibilidad en internet</h3>
+                    <p class="benefit-text">Mejoramos tu visibilidad en los buscadores de internet con SEO optimizado con IA para que te encuentren más fácilmente.</p>
+                </div>
+                <div class="benefit-card benefit-card-3">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="benefit-title">Entrega express</h3>
+                    <p class="benefit-text">Entrega express desde 24 horas, sin complicaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card service-card-1">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="service-title">Diseño Web y Consultoría</h3>
+                    <p class="service-description">Creamos páginas web (tu sitio de internet) y páginas de aterrizaje (landing page, para captar clientes o presentar promociones especiales) altamente efectivas que convierten visitantes en clientes. Asesoría para mejorar tu presencia online, campañas digitales, etc.</p>
+                </div>
+                <div class="service-card service-card-2">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Optimización de Conversiones</h3>
+                    <p class="service-description">Mejoramos tu tasa de conversión de curiosos a clientes con técnicas probadas y análisis de comportamiento.</p>
+                </div>
+                <div class="service-card service-card-3">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="service-title">Desarrollo Web</h3>
+                    <p class="service-description">Páginas web personalizadas y funcionales adaptados a las necesidades de tu negocio.</p>
+                </div>
+                <div class="service-card service-card-4">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="service-title">Marketing Digital</h3>
+                    <p class="service-description">Estrategias de mercadotecnia online para aumentar tu visibilidad y atraer clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Dudé para decidirme, pero el equipo fué super profesional y tuvieron lista mi página muy rápido. Ahora mis clientas hasta pueden agendar cita y mandarme mensajes.
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Cliente 1">
+                        </div>
+                        <div class="client-details">
+                            <div class="client-name">María González</div>
+                            <div class="client-role">Propietaria, Salón de Belleza MIRI</div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Ha sido un éxito nuestra página y la campaña con promoción especial que nos ayudaron a diseñar. Estamos invirtiendo gradualmente y hoy ya tenemos más trabajo cada vez.
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="armandojr.jpg" alt="Cliente 2">
+                        </div>
+                        <div class="client-details">
+                            <div class="client-name">Ing. Armando Dimas</div>
+                            <div class="client-role">Co-Propietario, DIMAS Servicios Eléctricos</div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Iniciamos con el plan básico y con su ayuda empezó a crecer mi lista de clientes y también los productos que manejo. Me alegra haberme decidido.
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente 3">
+                        </div>
+                        <div class="client-details">
+                            <div class="client-name">Ana Martínez</div>
+                            <div class="client-role">Fundadora, TuBelleza Productos Naturales</div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Planes y Precios</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Básico</h3>
+                    <div class="pricing-price">Desde $2,970 mxn<span> (USD $160)</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Página tipo Landing (1 sección)</li>
+                        <li><i class="fas fa-check"></i> Diseño responsivo (móvil y desktop)</li>
+                        <li><i class="fas fa-check"></i> Botón de contacto integrado con WhatsApp</li>                        
+                        <li><i class="fas fa-check"></i> SEO básica (para aparecer en Motores de Búsqueda)</li>  
+                        <li><i class="fas fa-check"></i> Entrega: 1-3 días hábiles</li> 
+                        <li><i class="fas fa-check"></i> Revisiones: 2 rondas incluidas</li>                         
+                        <li><i class="fas fa-check"></i> Nombre web con dominio gratuito (ejemplo: tuempresa.servidorx.com)</li>
+                        <li><i class="fas fa-check"></i> Soporte por 7 días hábiles</li>
+                    </ul>
+                    <a href="https://wa.me/526145028244?text=Hola,%20me%20interesa%20el%20plan%20Básico.%20¿Podrían%20darme%20más%20información?" target="_blank" rel="noopener noreferrer" class="cta-primary">Solicitar informes por WhatsApp</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-tag">POPULAR</div>
+                    <h3 class="pricing-title">Pro</h3>
+                    <div class="pricing-price">Desde $4,970 mxn<span> (USD $267)</span></div>
+                    <h3 class="pricing-subtitle"></h3>
+                    <ul class="pricing-features">                        
+                        <li><i class="fas fa-check"></i> Página tipo Landing (2 secciones) optimizada</li>
+                        <li><i class="fas fa-check"></i> Diseño responsivo (móvil y desktop)</li>
+                        <li><i class="fas fa-check"></i> Botón de contacto integrado con WhatsApp</li>                        
+                        <li><i class="fas fa-check"></i> Optimizada para Motores de Búsqueda</li>
+                        <li><i class="fas fa-check"></i> Copywriting persuasivo</li>
+                        <li><i class="fas fa-check"></i> Entrega: 3-5 días hábiles</li> 
+                        <li><i class="fas fa-check"></i> Revisiones: 2 rondas incluidas</li>                         
+                        <li><i class="fas fa-check"></i> Nombre web con Dominio propio (ejemplo: tuempresa.com)</li>
+                        <li><i class="fas fa-check"></i> Soporte por 15 días hábiles</li>
+                    </ul>
+                    <a href="https://wa.me/526145028244?text=Hola,%20me%20interesa%20el%20plan%20Pro.%20¿Podrían%20darme%20más%20información?" target="_blank" rel="noopener noreferrer" class="cta-primary">Solicitar informes por WhatsApp</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Premium</h3>
+                    <div class="pricing-price">Desde $9,570 mxn<span> (USD $515)</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Página Web con hasta 5 Secciones
+                        <li><i class="fas fa-check"></i> Se cotiza por proyecto</li>
+                        <li><i class="fas fa-check"></i> SEO inteligente con IA</li>
+                        <li><i class="fas fa-check"></i> Copywriting viral</li>
+                        <li><i class="fas fa-check"></i> Dominio propio</li>
+                        <li><i class="fas fa-check"></i> Soporte 24h</li>
+                    </ul>
+                    <a href="https://wa.me/526145028244?text=Hola,%20me%20interesa%20el%20plan%20Premium.%20¿Podrían%20darme%20más%20información?" target="_blank" rel="noopener noreferrer" class="cta-primary">Solicitar informes por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Contáctanos</h2>
+    <p style="text-align: center; font-size: 1.2rem; margin-top: -50px; margin-bottom: 40px; color: #ddd;">Déjanos tus datos y nos pondremos en contacto a la brevedad.</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSddmsQiAReT6EzZREer1sVWiRceSJPGlZzRNxzJBVl8fNCsZg/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="background-color:#fff; border-radius:18px; padding:0;">Cargando…</iframe>
+  </div>
+</section>
+
+
+
+    <!-- Guarantee Section -->
+    <section class="guarantee" id="guarantee">
+        <div class="container">
+            <div class="guarantee-content">
+                <h2 class="section-title" style="margin-bottom: 20px;">Nuestra Garantía: 100% Satisfacción</h2>
+                <p style="font-size: 1.5rem; font-weight: bold; color: #fff; margin-bottom: 10px;">✅ Demo gratis: paga solo si te sirve.</p>
+                <p style="font-size: 1.5rem; font-weight: bold; color: #fff; margin-bottom: 30px;">✅ SIN riesgo, SIN compromiso.</p>
+                <p>Confiamos tanto en la calidad de nuestro trabajo que, si no estás satisfecho con la demo, no pagas NADA.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>👉 Empieza hoy mismo, da click en el botón<br>para contactarnos y recibe tu demo en 24 hrs!</h2>
+            <p>Tu negocio merece presencia digital inmediata. Yo me encargo de todo.</p>
+            <a href="#contact" class="cta-primary" style="font-size: 1.3rem; padding: 20px 60px;">Quiero mi demo gratis</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>CreaWeb</h3>
+                    <p style="color: #bbb;">Expertos en diseño de landing pages profesionales que generan resultados. Elevamos tu presencia digital con soluciones personalizadas.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/webpages.ia/" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="mailto:InteractData@outlook.com" title="Enviar correo electrónico"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Diseño Web y Consultoría</a></li>
+                        <li><a href="#services">Optimización de Conversiones</a></li>
+                        <li><a href="#services">Desarrollo Web</a></li>
+                        <li><a href="#services">Marketing Digital</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Alejandro de Rodas S/N Despacho #1,<br>Cubres. Monterrey, N.L. 64344</li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+528119844430" style="color: #bbb; text-decoration: none; transition: color 0.3s;">+52 811 984 4430</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:InteractData@outlook.com" style="color: #bbb; text-decoration: none; transition: color 0.3s;">InteractData@outlook.com</a></li>
+                        <li><i class="fas fa-clock"></i> Lunes a Viernes: 9am - 6pm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CreaWeb. Todos los derechos reservados.</p>
+                <p class="legal-links">
+                    <a href="#" class="open-legal" data-type="aviso">Aviso de privacidad</a>
+                    &nbsp;|&nbsp;
+                    <a href="#" class="open-legal" data-type="condiciones">Condiciones del Servicio</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para mostrar texto legal inline -->
+    <div id="legal-modal" class="legal-modal" aria-hidden="true">
+        <div class="legal-modal-backdrop"></div>
+        <div class="legal-modal-content" role="dialog" aria-modal="true">
+            <button class="legal-modal-close" aria-label="Cerrar">&times;</button>
+            <div class="legal-modal-body" style="padding:24px; height:100%; overflow:auto; color:#eae6d9;">
+                <div id="legal-aviso" style="display:none;">
+                    <h2>Aviso de Privacidad – CreaWEB</h2>
+                    <p>En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (“LFPDPPP”), CreaWEB, con domicilio en Av. Alejandro de Rodas S/N Despacho #1, Cubres. Monterrey, N.L. 64344, es responsable del tratamiento de sus datos personales.</p>
+                    <h3>Finalidad del tratamiento de datos:</h3>
+                    <p>Su información será utilizada para la prestación de servicios de creación y diseño de páginas web y páginas de aterrizaje, así como servicios de diseño y marketing digital, incluyendo la gestión de clientes, comunicación y envío de información relevante sobre nuestros servicios, cotizaciones, atención a reportes, y facturación.</p>
+                    <h3>Datos recabados:</h3>
+                    <p>Podremos solicitar datos personales como nombre, correo electrónico, teléfono, empresa, preferencia de servicios, métodos de pago y cualquier información necesaria para la correcta prestación de los servicios.</p>
+                    <h3>Transferencia de datos:</h3>
+                    <p>Sus datos personales no serán compartidos con terceros, salvo en los supuestos previstos por la ley o con proveedores estrictamente necesarios para la operación.</p>
+                    <h3>Derechos ARCO:</h3>
+                    <p>Usted tiene derecho a acceder, rectificar, cancelar o oponerse al uso de sus datos personales enviando su solicitud al correo electrónico InteractData@outlook.com. Toda solicitud de reporte o ejercicio de derechos se atenderá en el horario de lunes a viernes de 9am a 6pm.</p>
+                    <h3>Cambios al aviso de privacidad:</h3>
+                    <p>Nos reservamos el derecho de realizar cambios o actualizaciones al presente aviso de privacidad. Las modificaciones serán notificadas en nuestra página web.</p>
+                    <h3>Contacto:</h3>
+                    <p>Teléfono y WhatsApp: +52 811 984 4430<br>Email: InteractData@outlook.com</p>
+                </div>
+                <div id="legal-condiciones" style="display:none;">
+                    <h2>Condiciones del Servicio – CreaWEB</h2>
+                    <h3>Objeto:</h3>
+                    <p>Los presentes términos regulan la prestación de servicios de creación y diseño de páginas web, páginas de aterrizaje, diseño digital y marketing digital por parte de CreaWEB.</p>
+                    <h3>Servicios:</h3>
+                    <p>CreaWEB se compromete a proporcionar los servicios pactados conforme lo solicitado y cotizado, respetando calidad y tiempos acordados.</p>
+                    <h3>Solicitudes y reportes:</h3>
+                    <p>Toda solicitud o reporte relacionado con los servicios debe enviarse al correo electrónico InteractData@outlook.com y será atendido en el horario de lunes a viernes de 9am a 6pm.</p>
+                    <h3>Condiciones de pago:</h3>
+                    <p>El pago por los servicios será acordado previamente y debe realizarse según los métodos aceptados por CreaWEB. El retraso en pagos puede causar demoras en la entrega.</p>
+                    <h3>Propiedad intelectual:</h3>
+                    <p>Los derechos sobre el diseño, contenido y desarrollo generado serán transferidos al cliente al concluir el servicio y realizar el pago total, excepto recursos protegidos por terceros.</p>
+                    <h3>Confidencialidad:</h3>
+                    <p>CreaWEB se compromete a mantener la confidencialidad de la información proporcionada por el cliente durante todo el proceso.</p>
+                    <h3>Limitación de responsabilidad:</h3>
+                    <p>CreaWEB no será responsable por afectaciones externas, caídas de servidores ajenos, accesos no autorizados o mal uso del sitio web una vez entregado el proyecto.</p>
+                    <h3>Modificaciones:</h3>
+                    <p>CreaWEB se reserva el derecho de modificar estas condiciones sin previo aviso. Las actualizaciones estarán disponibles en la página web.</p>
+                    <h3>Jurisdicción:</h3>
+                    <p>Para la interpretación y cumplimiento de estos términos, las partes se someten a las leyes y tribunales de Monterrey, N.L., México.</p>
+                </div>
+                <div class="legal-consent">
+                    <label><input type="checkbox" id="legal-consent-checkbox"> He leído y acepto los términos y el aviso de privacidad</label>
+                    <button id="legal-accept-btn" class="legal-btn" disabled>Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ensure hero padding-top matches header height to avoid overlap with fixed header
+        (function syncHeroPaddingWithHeader() {
+            const root = document.documentElement;
+            const header = document.querySelector('header');
+
+            function updateHeroPadding() {
+                if (!header) return;
+                const headerHeight = header.offsetHeight + 'px';
+                root.style.setProperty('--hero-padding-top', headerHeight);
+            }
+
+            // Update on load, resize and scroll (scroll may change header size if you implement shrink-on-scroll)
+            window.addEventListener('load', updateHeroPadding);
+            window.addEventListener('resize', updateHeroPadding);
+            window.addEventListener('scroll', updateHeroPadding);
+
+            // Initial call
+            updateHeroPadding();
+        })();
+
+        // Simple JavaScript for header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 0';
+                header.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            } else {
+                header.style.padding = '20px 0';
+                header.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const headerOffset = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add click event to logo to scroll to top
+        document.getElementById('logo').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const menuIcon = mobileMenuBtn.querySelector('i');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.contains('active');
+            menuIcon.classList.toggle('fa-times', isActive);
+            menuIcon.classList.toggle('fa-bars', !isActive);
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // PROMO COUNTDOWN CONFIGURABLE
+        function getNextPromoDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth(); // 0-indexed
+            const day = now.getDate();
+
+            let promoDay;
+            if (day <= 15) {
+                promoDay = 15;
+            } else {
+                promoDay = new Date(year, month + 1, 0).getDate(); // Last day of current month
+            }
+            return new Date(year, month, promoDay, 23, 59, 59);
+        }
+
+        function updatePromoBanner() {
+            const promoEndDate = getNextPromoDate();
+            const now = new Date();
+            let diff = Math.max(0, promoEndDate - now);
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * (1000 * 60 * 60 * 24);
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+
+            const minutes = Math.floor(diff / (1000 * 60));
+            diff -= minutes * (1000 * 60);
+
+            const seconds = Math.floor(diff / 1000);
+
+            function pad(n){ return n < 10 ? '0' + n : String(n); }
+            const promoDaysEl = document.getElementById('promo-days');
+            if (promoDaysEl) promoDaysEl.textContent = days;
+            const clock = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+            const clockEl = document.getElementById('promo-clock');
+            if (clockEl) clockEl.textContent = clock;
+
+            // Update widget units
+            const elDays = document.getElementById('cd-days');
+            const elHours = document.getElementById('cd-hours');
+            const elMinutes = document.getElementById('cd-minutes');
+            const elSeconds = document.getElementById('cd-seconds');
+
+            function updateUnit(el, value) {
+                if (!el) return;
+                const old = el.textContent;
+                if (String(old) !== String(value)) {
+                    el.textContent = value;
+                    const parent = el.closest('.cd-unit');
+                    if (parent) {
+                        parent.classList.add('pop');
+                        setTimeout(()=> parent.classList.remove('pop'), 350);
+                    }
+                }
+            }
+
+            updateUnit(elDays, days);
+            updateUnit(elHours, pad(hours));
+            updateUnit(elMinutes, pad(minutes));
+            updateUnit(elSeconds, pad(seconds));
+
+            const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+            const promoDateEl = document.getElementById('promo-date');
+            if (promoDateEl) promoDateEl.textContent = `${promoEndDate.getDate()} DE ${months[promoEndDate.getMonth()]} ${promoEndDate.getFullYear()}!`;
+        }
+
+    // Activate the promo countdown immediately and then every second
+    updatePromoBanner();
+    var promoIntervalID = setInterval(updatePromoBanner, 1000); // Update every second
+        
+        // --- Código para modal legal y copyright dinámico ---
+        (function(){
+            const modal = document.getElementById('legal-modal');
+            const closeBtn = modal ? modal.querySelector('.legal-modal-close') : null;
+            const avisoEl = document.getElementById('legal-aviso');
+            const condicionesEl = document.getElementById('legal-condiciones');
+
+            function openLegalByType(type) {
+                if (!modal) return;
+                // Hide both first
+                if (avisoEl) avisoEl.style.display = 'none';
+                if (condicionesEl) condicionesEl.style.display = 'none';
+                if (type === 'aviso' && avisoEl) avisoEl.style.display = 'block';
+                if (type === 'condiciones' && condicionesEl) condicionesEl.style.display = 'block';
+
+                // Reset consent UI every time modal opens (do not preselect)
+                const consentCheckbox = document.getElementById('legal-consent-checkbox');
+                const acceptBtn = document.getElementById('legal-accept-btn');
+                if (consentCheckbox) { consentCheckbox.checked = false; }
+                if (acceptBtn) { acceptBtn.disabled = true; }
+
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLegal() {
+                if (!modal) return;
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                // hide contents
+                if (avisoEl) avisoEl.style.display = 'none';
+                if (condicionesEl) condicionesEl.style.display = 'none';
+            }
+
+            document.querySelectorAll('.open-legal').forEach(a => {
+                a.addEventListener('click', function(e){
+                    e.preventDefault();
+                    const type = this.dataset.type || this.getAttribute('data-type');
+                    openLegalByType(type);
+                });
+            });
+
+            if (closeBtn) closeBtn.addEventListener('click', closeLegal);
+            if (modal) modal.addEventListener('click', (e)=>{ if (e.target === modal.querySelector('.legal-modal-backdrop')) closeLegal(); });
+
+            // Cerrar con Escape
+            document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeLegal(); });
+
+            // Consentimiento: checkbox + aceptar
+            const consentCheckbox = document.getElementById('legal-consent-checkbox');
+            const acceptBtn = document.getElementById('legal-accept-btn');
+            const CONSENT_KEY = 'creaweb_legal_consent_v1';
+
+            // Si ya dio consentimiento, marcar estado para UX
+            const saved = localStorage.getItem(CONSENT_KEY);
+            if (saved === 'true') {
+                if (consentCheckbox) consentCheckbox.checked = true;
+                if (acceptBtn) acceptBtn.disabled = false;
+            }
+
+            if (consentCheckbox) {
+                consentCheckbox.addEventListener('change', function(){
+                    if (acceptBtn) acceptBtn.disabled = !this.checked;
+                });
+            }
+
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', function(){
+                    const checked = consentCheckbox && consentCheckbox.checked;
+                    if (checked) {
+                        localStorage.setItem(CONSENT_KEY, 'true');
+                        // Determinar cuál estaba visible para el mensaje
+                        const tipo = (avisoEl && avisoEl.style.display === 'block') ? 'Aviso de Privacidad' : 'Condiciones de Uso';
+                        closeLegal();
+                        // Mostrar toast
+                        const toast = document.getElementById('legal-toast');
+                        if (toast) {
+                            toast.textContent = `Al presionar Aceptar usted declara estar de acuerdo con el ${tipo}`;
+                            toast.classList.add('show');
+                            setTimeout(()=>{ toast.classList.remove('show'); }, 3000);
+                        }
+                    }
+                });
+            }
+
+            // Actualizar copyright al año actual
+            const copyrightEl = document.querySelector('.copyright p');
+            if (copyrightEl) {
+                const year = new Date().getFullYear();
+                copyrightEl.innerHTML = `&copy; ${year} CreaWeb. Todos los derechos reservados.`;
+            }
+        })();
+    </script>     
+
+        <script>
+            // Staggered pop-in animation for countdown units on page load
+            (function(){
+                function triggerCountdownEntry(){
+                    const units = document.querySelectorAll('.countdown-widget .cd-unit');
+                    if(!units || units.length===0) return;
+                    units.forEach((el, idx) => {
+                        setTimeout(() => {
+                            el.classList.add('popIn');
+                        }, idx * 90 + 120); // stagger
+                    });
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', triggerCountdownEntry);
+                } else {
+                    triggerCountdownEntry();
+                }
+            })();
+        </script>
+    <div id="legal-toast" class="legal-toast" role="status" aria-live="polite"></div>
+    </body>
+</html>  
